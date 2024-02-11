@@ -63,8 +63,26 @@ function getMaxNumber(a, b, c) {
  * {x: 1, y: 1}, {x: 2, y: 8} => false
  * {x: 1, y: 1}, {x: 2, y: 8} => false
  */
-function canQueenCaptureKing(/* queen, king */) {
-  throw new Error('Not implemented');
+function canQueenCaptureKing(queen, king) {
+  const queenX = queen.x;
+  const queenY = queen.y;
+  const kingX = king.x;
+  const kingY = king.y;
+  if (queenX === kingX || queenY === kingY) {
+    return true;
+  }
+  for (let i = 1; i <= 8; i += 1) {
+    if (
+      (queenX + i === kingX && queenY + i === kingY) ||
+      (queenX - i === kingX && queenY + i === kingY) ||
+      (queenX + i === kingX && queenY - i === kingY) ||
+      (queenX - i === kingX && queenY - i === kingY)
+    ) {
+      return true;
+    }
+  }
+
+  return false;
 }
 
 /**
@@ -106,8 +124,40 @@ function isIsoscelesTriangle(a, b, c) {
  *  10  => X
  *  26  => XXVI
  */
-function convertToRomanNumerals(/* num */) {
-  throw new Error('Not implemented');
+function convertToRomanNumerals(num) {
+  let result = '';
+  const obj = {
+    1: 'I',
+    2: 'II',
+    3: 'III',
+    4: 'IV',
+    5: 'V',
+    6: 'VI',
+    7: 'VII',
+    8: 'VIII',
+    9: 'IX',
+    10: 'X',
+  };
+
+  if (num <= 10) {
+    result = obj[num];
+  }
+  if (num > 10 && num < 20) {
+    result = `X${obj[num % 10]}`;
+  }
+  if (num === 20) {
+    result = 'XX';
+  }
+  if (num > 20 && num < 30) {
+    result = `XX${obj[num % 20]}`;
+  }
+  if (num === 30) {
+    result = 'XXX';
+  }
+  if (num > 30 && num < 40) {
+    result = `XXX${obj[num % 30]}`;
+  }
+  return result;
 }
 
 /**
